@@ -2,6 +2,10 @@
 %h1 Users
 = paginate @users, window: 2
 
+= form_tag(users_path, method: :get) do
+  Search by name #{text_field_tag :name, params[:name]}
+  \#{submit_tag 'Search', name: nil}
+
 %table
   %thead
     %tr

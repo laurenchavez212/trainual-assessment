@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-
   # GET /users
   # GET /users.json
+
   def index
-    @users = User.order(:updated_at).page(params[:page])
+    if params[:name]
+      @users = User.where('name iLIKE ? ', "%#{params[:name]}%").order(:updated_at).page(params[:page])
+    else
+      @users = User.order(:updated_at).page(params[:page])
+    end
   end
+
 
   # GET /users/1
   # GET /users/1.json
