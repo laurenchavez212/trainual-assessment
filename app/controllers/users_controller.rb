@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
   # GET /users
   # GET /users.json
 
   def index
     if params[:name]
-      @users = User.where('name iLIKE ? ', "%#{params[:name]}%").order(:updated_at).page(params[:page])
+      @users = User.where('name iLIKE ? ', "%#{params[:name]}%").order(sort_column + " " + sort_direction).page(params[:page])
     else
-      @users = User.order(:updated_at).page(params[:page])
+      @users = User.order(sort_column + " " + sort_direction).page(params[:page])
     end
   end
 
@@ -76,5 +76,13 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :email, :title, :phone, :status)
+    end
+
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

@@ -9,12 +9,12 @@
 %table
   %thead
     %tr
-      %th Last Updated
-      %th Name
-      %th Email
-      %th Title
-      %th Phone
-      %th Status
+      %th= sortable "updated_at", 'Last Updated'
+      %th= sortable "name"
+      %th= sortable "email"
+      %th= sortable "title"
+      %th= sortable "phone"
+      %th= sortable "status"
       %th{:colspan => "3"}
   %tbody
   - @users.each do |user|
