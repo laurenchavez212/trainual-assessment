@@ -1,0 +1,26 @@
+= form_with(model: user, local: true) do |form|
+  - if user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - user.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :email
+    = form.text_field :email
+  .field
+    = form.label :title
+    = form.text_field :title
+  .field
+    = form.label :phone
+    = form.text_field :phone
+  .field
+    = form.label :status
+    = form.select :status, User.statuses.keys.to_a
+  .actions
+    = form.submit
