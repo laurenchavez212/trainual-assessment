@@ -1,5 +1,5 @@
 = form_for(@user, remote: true, :html => { :role => "form" }) do |f|
-  .row
+  .row{:style => "display: flex; justify-content: center"}
     .col-sm-6
       .form-group
         = f.label :name, :class => "control-label"
@@ -17,4 +17,4 @@
         = f.label :status, :class => "control-label"
         = f.select :status, User.statuses.keys.to_a, :class => "form-control"
       .form-group
-        = f.submit  @user.new_record? ? "Create Create" : "Update User", :class => "btn btn-primary submit-user"
+        = f.submit  @user.new_record? ? "Create" : "Update User",style: "background-color: #482d8c; color: white", :class => "btn submit-user"

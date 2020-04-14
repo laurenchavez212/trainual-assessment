@@ -4,6 +4,6 @@
   %td= user.email
   %td= user.title
   %td= user.phone
-  %td= user.status
+  %td{user.status == "active" ? {:style => "color: green"} : {:style => "color: red"}}= user.status
   %td= link_to 'Edit', edit_user_path(user), remote: true
   %td= link_to 'Delete', user, remote: true, :method => :delete, data: {confirm: "Delete User: #{user.name}"}

@@ -1,27 +1,29 @@
-%p#notice= notice
-%h1 Users
-= paginate @users, window: 2
+%link{:href => "https://fonts.googleapis.com/css2?family=Muli&display=swap", :rel => "stylesheet"}/
+%div{:style => "color: #482d8c; padding: 1.5%; background-color: #f3f3f3; font-family: Muli"}
+  %p#notice= notice
+  %h1{:style => "color: #482d8c"} Trainuals Awesome Fake Users
+  = paginate @users, window: 2
 
-= form_tag(users_path, method: :get) do
-  Search by name #{text_field_tag :name, params[:name]}
-  \#{submit_tag 'Search', name: nil}
+  = form_tag(users_path, method: :get) do
+    Search by name #{text_field_tag :name, params[:name]}
+    \#{submit_tag 'Search', name: nil}
 
-= link_to "New User", new_user_path, remote: true, class: "btn btn-primary"
+  = link_to "New User", new_user_path, remote: true, style: "background-color: #482d8c; color: white; margin-top: 1%", class: "btn"
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th= sortable "updated_at", 'Last Updated'
-      %th= sortable "name"
-      %th= sortable "email"
-      %th= sortable "title"
-      %th= sortable "phone"
-      %th= sortable "status"
-      %th{:colspan => "2"}
-  %tbody
-  - @users.each do |user|
-    = render partial: 'row', locals: {user: user}
+  %table.table.table-striped{:style => "margin-top: 1%"}
+    %thead
+      %tr{:style => "color: #482d8c"}
+        %th= sortable "updated_at", 'Last Updated'
+        %th= sortable "name"
+        %th= sortable "email"
+        %th= sortable "title"
+        %th= sortable "phone"
+        %th= sortable "status"
+        %th{:colspan => "2"}
+    %tbody
+    - @users.each do |user|
+      = render partial: 'row', locals: {user: user}
 
-  %br/
+    %br/
 
-  = render 'dialog'
+    = render 'dialog'
