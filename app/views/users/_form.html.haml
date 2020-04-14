@@ -1,26 +1,21 @@
-= form_with(model: user, local: true) do |form|
-  - if user.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(user.errors.count, "error")
-        prohibited this user from being saved:
-      %ul
-        - user.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = form.label :name
-    = form.text_field :name
-  .field
-    = form.label :email
-    = form.text_field :email
-  .field
-    = form.label :title
-    = form.text_field :title
-  .field
-    = form.label :phone
-    = form.text_field :phone
-  .field
-    = form.label :status
-    = form.select :status, User.statuses.keys.to_a
-  .actions
-    = form.submit
+= form_for(@user, remote: true, :html => { :role => "form" }) do |f|
+  .row
+    .col-sm-6
+      .form-group
+        = f.label :name, :class => "control-label"
+        = f.text_field :name, :class => "form-control first_input"
+      .form-group
+        = f.label :email, :class => "control-label"
+        = f.text_field :email, :class => "form-control"
+      .form-group
+        = f.label :title, :class => "control-label"
+        = f.text_field :title, :class => "form-control"
+      .form-group
+        = f.label :phone, :class => "control-label"
+        = f.text_field :phone, :class => "form-control"
+    .col-sm-6
+      .form-group
+        = f.label :status, :class => "control-label"
+        = f.select :status, User.statuses.keys.to_a, :class => "form-control"
+      .form-group
+        = f.submit  @user.new_record? ? "Create Create" : "Update User", :class => "btn btn-primary submit-user"

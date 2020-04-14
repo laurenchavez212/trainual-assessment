@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("jquery")
 import './bootstrap_custom.js'
 
 
@@ -16,3 +17,16 @@ import './bootstrap_custom.js'
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+$(document).ajaxError(function (event, xhr, options, exc) {
+
+  var errors = JSON.parse(xhr.responseText);
+  var er = "<ul>";
+  for (var i = 0; i < errors.length; i++) {
+    var list = errors[i];
+    er += "<li>" + list + "</li>"
+  }
+  er += "</ul>"
+  $("#error_explanation").html(er);
+
+});

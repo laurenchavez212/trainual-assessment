@@ -6,6 +6,8 @@
   Search by name #{text_field_tag :name, params[:name]}
   \#{submit_tag 'Search', name: nil}
 
+= link_to "New User", new_user_path, remote: true, class: "btn btn-primary"
+
 %table
   %thead
     %tr
@@ -15,18 +17,11 @@
       %th= sortable "title"
       %th= sortable "phone"
       %th= sortable "status"
-      %th{:colspan => "3"}
+      %th{:colspan => "2"}
   %tbody
   - @users.each do |user|
-    %tr
-      %td= user.updated_at
-      %td= user.name
-      %td= user.email
-      %td= user.title
-      %td= user.phone
-      %td= user.status
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+    = render partial: 'row', locals: {user: user}
+
   %br/
-  = link_to 'New User', new_user_path
+
+  = render 'dialog'

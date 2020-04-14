@@ -1,0 +1,9 @@
+%tr{id: "user_#{user.id}"}
+  %td= user.updated_at.to_time.strftime('%m/%d/%Y %l:%M %p')
+  %td= user.name
+  %td= user.email
+  %td= user.title
+  %td= user.phone
+  %td= user.status
+  %td= link_to 'Edit', edit_user_path(user), remote: true
+  %td= link_to 'Delete', user, remote: true, :method => :delete, data: {confirm: "Delete User: #{user.name}"}
